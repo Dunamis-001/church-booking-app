@@ -9,10 +9,13 @@ from routes.auth import auth_bp
 from routes.rooms import rooms_bp
 from routes.bookings import bookings_bp
 from models import User 
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path="/", static_folder="./client/dist")
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
     app.config.from_object(Config)
     
     # Initialize extensions
@@ -27,9 +30,13 @@ def create_app():
     app.register_blueprint(rooms_bp)
     app.register_blueprint(bookings_bp)
     
-    @app.route('/')
+    @app.route("/")
     def index():
-        return '<h1>Church Booking API</h1>'
+        return app.send_static_file("index.html")
+
+    @app.errorhandler(404)
+    def not_found(err):
+        return app.send_static_file("index.html")
     
     return app
 
