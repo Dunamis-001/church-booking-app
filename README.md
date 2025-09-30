@@ -177,25 +177,25 @@ Check index.css contains Tailwind directives and full-height styles:
 @tailwind utilities;
 
 html, body, #root { height: 100%; margin: 0; padding: 0; }
-How to Run
+
+# How to Run
+
 Start the Backend API:
 From the backend directory:
-
-
-# Activate virtual environment first (see above)
+Activate virtual environment first (see above)
 python app.py
 API will run at http://localhost:5000
 
 Start the Frontend:
+
 From backend/client directory:
-
-
 npm run dev
 Vite will run the frontend at http://localhost:5173
 
 (Optional) To avoid CORS issues during development, configure a proxy in vite.config.js linking /api calls to http://localhost:5000.
 
-Usage
+### Usage
+
 Home: Overview and entry points to rooms and bookings.
 
 Rooms: Browse all rooms with details like name, description, capacity, location, and image.
@@ -221,5 +221,5 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-text
+
 This README comprehensively covers the key aspects of your Church Booking App project as per your provided format.
