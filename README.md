@@ -27,7 +27,7 @@ Support and Contact details
 
 License
 
-##Features
+## Features
 
 Browse Rooms: View a list of available rooms with capacity, location, and image.
 
