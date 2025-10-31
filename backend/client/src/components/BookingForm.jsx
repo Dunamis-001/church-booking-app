@@ -25,7 +25,7 @@ const BookingForm = ({ selectedRoom, setPage }) => {
       const bookingData = {
         room_id: selectedRoom.id,
         purpose,
-        status: 'Pending',
+        status: 'pending',
         start_time: new Date(startDate).toISOString(),
         end_time: new Date(endDate).toISOString(),
       };
@@ -33,8 +33,8 @@ const BookingForm = ({ selectedRoom, setPage }) => {
       await api.createBooking(bookingData);
       setPage('bookings');
     } catch (err) {
-      setBookingError(err.message);
-      console.error(err);
+      setBookingError(err.message); 
+      console.error('Booking error:', err);
     } finally {
       setIsSubmitting(false);
     }

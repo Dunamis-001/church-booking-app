@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from config import Config
-from extensions import db
+from extensions import db, ma
 from routes.auth import auth_bp
 from routes.rooms import rooms_bp
 from routes.bookings import bookings_bp
@@ -20,10 +20,13 @@ app.config.from_object(Config)
 
 # Initialize extensions
 db.init_app(app)
+ma.init_app(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-CORS(app, resources={r"/*": {"origins": Config.CORS_ORIGINS}})
+
+CORS(app)
+    
 
 # Register blueprints
 app.register_blueprint(auth_bp)
@@ -41,5 +44,4 @@ def not_found(err):
 
 
 if __name__ == '__main__':
-
     app.run(debug=False, port=5000)

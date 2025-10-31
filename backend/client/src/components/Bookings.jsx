@@ -34,6 +34,19 @@ const Bookings = () => {
     fetchData();
   }, [isAuthenticated]);
 
+  const handleDeleteBooking = async (bookingId) => {
+    if (!window.confirm('Are you sure you want to delete this booking?')) {
+      return;
+    }
+
+    try {
+      await api.deleteBooking(bookingId);
+      setBookings(bookings.filter(b => b.id !== bookingId));
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   const getRoomName = (roomId) => rooms.find((r) => r.id === roomId)?.name ?? `Room ${roomId}`;
 
   if (!isAuthenticated) {

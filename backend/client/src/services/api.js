@@ -42,7 +42,7 @@ class ApiService {
     return response.json();
   }
 
-  // Auth methods
+  // Auth methods (unchanged)
   async login(username, password) {
     return this.request('/login', {
       method: 'POST',
@@ -61,9 +61,13 @@ class ApiService {
     return this.request('/profile');
   }
 
-  // Rooms methods
+  // Rooms methods (updated for new structure)
   async getRooms() {
     return this.request('/rooms');
+  }
+
+  async getRoom(id) {
+    return this.request(`/rooms/${id}`);
   }
 
   async createRoom(roomData) {
@@ -73,15 +77,45 @@ class ApiService {
     });
   }
 
-  // Bookings methods
+  async updateRoom(id, roomData) {
+    return this.request(`/rooms/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(roomData),
+    });
+  }
+
+  async deleteRoom(id) {
+    return this.request(`/rooms/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Bookings methods (updated for new structure)
   async getBookings() {
     return this.request('/bookings');
+  }
+
+  async getBooking(id) {
+    return this.request(`/bookings/${id}`);
   }
 
   async createBooking(bookingData) {
     return this.request('/bookings', {
       method: 'POST',
       body: JSON.stringify(bookingData),
+    });
+  }
+
+  async updateBooking(id, bookingData) {
+    return this.request(`/bookings/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(bookingData),
+    });
+  }
+
+  async deleteBooking(id) {
+    return this.request(`/bookings/${id}`, {
+      method: 'DELETE',
     });
   }
 }

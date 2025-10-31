@@ -1,4 +1,4 @@
-from app import create_app
+from app import app
 from models import User, Room, Booking
 from datetime import datetime, timedelta
 from extensions import db
@@ -6,7 +6,7 @@ import random
 
 
 def seed_database():
-    app = create_app()
+  
     
     with app.app_context():
         # Clear existing data
@@ -37,7 +37,7 @@ def seed_database():
         db.session.commit()
         print(f"Created {len(users)} users")
         
-        # Create sample rooms
+        # Create sample rooms with diverse, working image URLs
         print("Creating rooms...")
         rooms_data = [
             {
@@ -45,56 +45,56 @@ def seed_database():
                 'description': 'Large worship hall with seating for 300 people, perfect for Sunday services and special events.',
                 'capacity': 300,
                 'location': 'Ground Floor',
-                'image_url': 'https://images.unsplash.com/photo-1541558869434-2840d308329a?w=500&h=300&fit=crop'
+                'image_url': 'https://images.unsplash.com/photo-1519494026892-80ce3a83b695?w=800&q=80'
             },
             {
                 'name': 'Fellowship Hall',
                 'description': 'Multi-purpose room ideal for community gatherings, potlucks, and small events.',
                 'capacity': 150,
                 'location': 'Ground Floor',
-                'image_url': 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=500&h=300&fit=crop'
+                'image_url': 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80'
             },
             {
                 'name': 'Youth Room',
                 'description': 'Modern space designed for youth activities, games, and meetings.',
                 'capacity': 50,
                 'location': 'Second Floor',
-                'image_url': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=300&fit=crop'
+                'image_url': 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80'
             },
             {
                 'name': 'Conference Room',
                 'description': 'Professional meeting space with presentation equipment and comfortable seating.',
                 'capacity': 20,
                 'location': 'Second Floor',
-                'image_url': 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=300&fit=crop'
+                'image_url': 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80'
             },
             {
                 'name': 'Children\'s Chapel',
                 'description': 'Bright and colorful space designed specifically for children\'s services and activities.',
                 'capacity': 75,
                 'location': 'Ground Floor',
-                'image_url': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=300&fit=crop'
+                'image_url': 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80'
             },
             {
                 'name': 'Prayer Room',
                 'description': 'Quiet, peaceful space for individual prayer, meditation, and small group worship.',
                 'capacity': 15,
                 'location': 'Second Floor',
-                'image_url': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop'
+                'image_url': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80'
             },
             {
                 'name': 'Kitchen',
                 'description': 'Fully equipped kitchen for preparing meals for church events and community outreach.',
                 'capacity': 10,
                 'location': 'Ground Floor',
-                'image_url': 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&h=300&fit=crop'
+                'image_url': 'https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=800&q=80'
             },
             {
                 'name': 'Library',
                 'description': 'Quiet study space with religious books, resources, and comfortable reading areas.',
                 'capacity': 25,
                 'location': 'Second Floor',
-                'image_url': 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&h=300&fit=crop'
+                'image_url': 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80'
             }
         ]
         
@@ -184,7 +184,8 @@ def seed_database():
         print(f"Bookings created: {len(bookings)}")
         print("\nTest accounts:")
         for user in users:
-            print(f"  Username: {user.username} | Password: {user_data['password'] if user.username == 'admin' else 'Check users_data'}")
+            user_data_dict = {u['username']: u['password'] for u in users_data}
+            print(f"  Username: {user.username} | Password: {user_data_dict.get(user.username, 'N/A')}")
         print("\nYou can now test the application with these accounts!")
 
 if __name__ == '__main__':
